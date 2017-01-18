@@ -22,11 +22,14 @@ bot.on('message', function(data) {
 
     //check if user is the bot, so bot doesn't talk to itself'
     if(data.user !== this.user.id) {
-
+      
+      //access trump quote api
       request('https://api.whatdoestrumpthink.com/api/v1/quotes/random', function (error, resp, body) {
         if (!error && resp.statusCode == 200) {
           let text = `"${JSON.parse(body).message}"`;
-          bot.postMessage(data.channel, text, {as_user: true});
+          bot.postMessage(data.channel, text, {
+            as_user: true
+          });
         } 
       })
         
